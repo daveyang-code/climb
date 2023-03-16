@@ -1,0 +1,12 @@
+@misc{ just-hold_dataset,
+    title = { just hold Dataset },
+    type = { Open Source Dataset },
+    author = { JM studio },
+    howpublished = { \url{ https://universe.roboflow.com/jm-studio/just-hold } },
+    url = { https://universe.roboflow.com/jm-studio/just-hold },
+    journal = { Roboflow Universe },
+    publisher = { Roboflow },
+    year = { 2023 },
+    month = { mar },
+    note = { visited on 2023-03-15 },
+}
