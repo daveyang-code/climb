@@ -5,12 +5,12 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 
-
 def coords(x, y):
     return (int(x * vid_width), int(y * vid_height))
 
 
 def drawLines(landmarks):
+    
     if landmarks:
 
         l_wrist = coords(landmarks.landmark[15].x, landmarks.landmark[15].y)
@@ -19,12 +19,27 @@ def drawLines(landmarks):
         l_ankle = coords(landmarks.landmark[27].x, landmarks.landmark[27].y)
         r_ankle = coords(landmarks.landmark[28].x, landmarks.landmark[28].y)
 
+        m_shldr = coords((landmarks.landmark[11].x + landmarks.landmark[12].x) / 2,
+                         (landmarks.landmark[11].y + landmarks.landmark[12].y) / 2)
+        
+        m_hip = coords((landmarks.landmark[23].x + landmarks.landmark[24].x) / 2,
+                         (landmarks.landmark[23].y + landmarks.landmark[24].y) / 2)
+
         cv2.line(image, l_wrist, l_ankle, (255, 0, 0), 2)
         cv2.line(image, l_wrist, r_ankle, (255, 0, 0), 2)
+        
         cv2.line(image, r_wrist, l_ankle, (0, 0, 255), 2)
         cv2.line(image, r_wrist, r_ankle, (0, 0, 255), 2)
+        
         cv2.line(image, l_wrist, r_wrist, (255, 0, 255), 2)
         cv2.line(image, l_ankle, r_ankle, (255, 0, 255), 2)
+
+        cv2.line(image, l_wrist, m_hip, (0, 255, 0), 1)
+        cv2.line(image, r_wrist, m_hip, (0, 255, 0), 1)
+
+        cv2.line(image, l_ankle, m_shldr, (255, 255, 0), 1)
+        cv2.line(image, r_ankle, m_shldr, (255, 255, 0), 1)
+
 
 cap = cv2.VideoCapture("boulder.mp4")
 vid_width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
